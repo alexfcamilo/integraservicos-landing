@@ -13,7 +13,6 @@ function App() {
               <li><a href="#quem-somos" className="hover:text-teal-400">Quem Somos</a></li>
               <li><a href="#objetivo" className="hover:text-teal-400">Objetivo</a></li>
               <li><a href="#como-funciona" className="hover:text-teal-400">Como Funciona</a></li>
-              <li><a href="mailto:suporteconectaservicos@gmail.com" className="hover:text-teal-400">Contato</a></li>
             </ul>
           </nav>
         </div>
@@ -39,15 +38,13 @@ function App() {
 
       {/* Quem Somos */}
       <section id="quem-somos" className="py-16 bg-white text-gray-900">
-        <div className="container mx-auto px-4 flex flex-col md:flex-row items-center">
-          <div className="md:w-1/2">
-            <h3 className="text-3xl font-bold text-teal-500 mb-4 text-center">Quem Somos</h3>
-            <p className="text-gray-700">
-              Somos uma startup de Campo Largo dedicada a conectar clientes e prestadores de
-              serviços de forma prática e segura, trazendo confiança e eficiência.
-            </p>
-          </div>
-          <div className="md:w-1/2 mt-6 md:mt-0">
+        <div className="container mx-auto px-4 text-center">
+          <h3 className="text-3xl font-bold text-teal-500 mb-4">Quem Somos</h3>
+          <p className="text-gray-700 max-w-2xl mx-auto">
+            Somos uma startup de Campo Largo dedicada a conectar clientes e prestadores de
+            serviços de forma prática e segura, trazendo confiança e eficiência.
+          </p>
+          <div className="mt-6">
             <img src="/icon.png" alt="Ícone de busca de serviços" className="max-w-xs mx-auto" />
           </div>
         </div>
@@ -112,7 +109,7 @@ function App() {
             <a href="/privacidade" className="hover:text-teal-400">Política de Privacidade</a> |{' '}
             <a href="/termos" className="hover:text-teal-400">Termos de Uso</a>
           </p>
-          <p>Contato: <a href="mailto:suporteconectaservicos@gmail.com" className="hover:text-teal-400">suporteconectaservicos@gmail.com</a></p>
+          <p>Contato: <a className="hover:text-teal-400">suporteconectaservicos@gmail.com</a></p>
         </div>
       </footer>
     </div>
