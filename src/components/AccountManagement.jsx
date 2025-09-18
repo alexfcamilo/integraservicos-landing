@@ -41,12 +41,20 @@ const AccountManagement = ({ isOpen, onClose }) => {
         throw new Error('Token não encontrado');
       }
 
+      console.log('Carregando dados do usuário...');
       const response = await fetch(`${API_BASE_URL}/me`, {
-        headers: { 'Authorization': `Bearer ${token}` }
+        method: 'GET',
+        headers: { 
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
       });
+
+      console.log('Response status:', response.status);
 
       if (response.ok) {
         const userData = await response.json();
+        console.log('Dados do usuário carregados:', userData);
         setFormData({
           firstName: userData.first_name || '',
           lastName: userData.last_name || '',
@@ -57,9 +65,12 @@ const AccountManagement = ({ isOpen, onClose }) => {
           newPassword: ''
         });
       } else {
-        throw new Error('Erro ao carregar dados da conta');
+        const errorData = await response.json().catch(() => ({}));
+        console.error('Erro ao carregar dados:', errorData);
+        throw new Error(errorData.error || 'Erro ao carregar dados da conta');
       }
     } catch (err) {
+      console.error('Erro na requisição:', err);
       setError(err.message);
     } finally {
       setLoadingUserData(false);

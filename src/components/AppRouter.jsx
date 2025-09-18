@@ -34,7 +34,14 @@ const AppRouter = () => {
   };
 
   if (loading) {
-    return <LoadingSpinner />;
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <LoadingSpinner size="xl" />
+          <p className="text-gray-600 mt-4 text-lg">Carregando...</p>
+        </div>
+      </div>
+    );
   }
 
   // Se o modal de login estiver aberto, mostrar ele

@@ -21,20 +21,29 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const checkAuthStatus = async () => {
+    setLoading(true);
     const token = localStorage.getItem('token');
-    if (token) {
-      try {
-        const userData = await authAPI.me();
-        setUser(userData);
-        setIsAuthenticated(true);
-      } catch (error) {
-        console.error('Erro ao verificar autenticação:', error);
-        localStorage.removeItem('token');
-        setIsAuthenticated(false);
-        setUser(null);
-      }
+    
+    if (!token) {
+      setIsAuthenticated(false);
+      setUser(null);
+      setLoading(false);
+      return;
     }
-    setLoading(false);
+
+    try {
+      const userData = await authAPI.me();
+      setUser(userData);
+      setIsAuthenticated(true);
+    } catch (error) {
+      console.error('Erro ao verificar autenticação:', error);
+      // Limpar token inválido
+      localStorage.removeItem('token');
+      setIsAuthenticated(false);
+      setUser(null);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const login = async (credentials) => {
@@ -56,19 +65,21 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
+    console.log('Fazendo logout...');
     localStorage.removeItem('token');
     setIsAuthenticated(false);
     setUser(null);
+    // Recarregar a página para garantir que o estado seja limpo
+    window.location.reload();
   };
 
-  // Novo: Atualizar dados da conta
+  // Atualizar dados da conta
   const updateAccount = async (accountData) => {
     try {
       const response = await authAPI.updateAccount(accountData);
       
       // Recarregar dados do usuário após atualização
-      const updatedUserData = await authAPI.me();
-      setUser(updatedUserData);
+      await checkAuthStatus();
       
       return { success: true, data: response };
     } catch (error) {
@@ -79,7 +90,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // Novo: Excluir conta
+  // Excluir conta
   const deleteAccount = async () => {
     try {
       await authAPI.deleteAccount();
@@ -96,14 +107,13 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // Novo: Cancelar premium
+  // Cancelar premium
   const cancelPremium = async () => {
     try {
       const response = await authAPI.cancelPremium();
       
       // Recarregar dados do usuário para atualizar status premium
-      const updatedUserData = await authAPI.me();
-      setUser(updatedUserData);
+      await checkAuthStatus();
       
       return { success: true, data: response };
     } catch (error) {

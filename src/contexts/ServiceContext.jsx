@@ -30,10 +30,90 @@ export const ServiceProvider = ({ children }) => {
   const [selectedCidade, setSelectedCidade] = useState('Campo Largo');
   const [selectedTag, setSelectedTag] = useState('');
 
-  const searchProviders = async (page = 1) => {
-    if (!searchTerm && !selectedTag) {
-      setError('Informe um termo de busca ou selecione uma categoria');
-      return;
+  // Cidades disponíveis por estado (expandir conforme necessário)
+  const availableLocations = {
+    'PR': [
+      'Campo Largo',
+      'Curitiba',
+      'São José dos Pinhais',
+      'Pinhais',
+      'Colombo',
+      'Almirante Tamandaré',
+      'Fazenda Rio Grande',
+      'Araucária',
+      'Piraquara',
+      'Quatro Barras'
+    ],
+    'SP': [
+      'São Paulo',
+      'Guarulhos',
+      'Campinas',
+      'São Bernardo do Campo',
+      'Santo André',
+      'Osasco',
+      'Sorocaba',
+      'Ribeirão Preto',
+      'Santos',
+      'Mauá'
+    ],
+    'RJ': [
+      'Rio de Janeiro',
+      'São Gonçalo',
+      'Duque de Caxias',
+      'Nova Iguaçu',
+      'Niterói',
+      'Belford Roxo',
+      'São João de Meriti',
+      'Campos dos Goytacazes',
+      'Petrópolis',
+      'Volta Redonda'
+    ],
+    'MG': [
+      'Belo Horizonte',
+      'Uberlândia',
+      'Contagem',
+      'Juiz de Fora',
+      'Betim',
+      'Montes Claros',
+      'Ribeirão das Neves',
+      'Uberaba',
+      'Governador Valadares',
+      'Ipatinga'
+    ]
+  };
+
+  const estados = [
+    { code: 'PR', name: 'Paraná' },
+    { code: 'SP', name: 'São Paulo' },
+    { code: 'RJ', name: 'Rio de Janeiro' },
+    { code: 'MG', name: 'Minas Gerais' }
+  ];
+
+  const handleLocationChange = (newUf, newCidade = null) => {
+    setSelectedUf(newUf);
+    
+    // Se uma cidade específica foi selecionada, usar ela
+    // Senão, usar a primeira cidade disponível para o estado
+    if (newCidade) {
+      setSelectedCidade(newCidade);
+    } else {
+      const firstCity = availableLocations[newUf]?.[0] || 'Campo Largo';
+      setSelectedCidade(firstCity);
+    }
+    
+    // Reset pagination
+    setCurrentPageNum(1);
+  };
+
+  // Função de busca atualizada - permite busca apenas por tag
+  const searchProviders = async (page = 1, forceTag = null) => {
+    // Use a tag forçada se fornecida, senão use a tag selecionada
+    const tagToSearch = forceTag || selectedTag;
+    
+    // Agora permite busca apenas por tag OU por termo de busca
+    if (!searchTerm && !tagToSearch) {
+      setError('Selecione uma categoria para buscar');
+      return { success: false, error: 'Selecione uma categoria para buscar' };
     }
 
     if (page === 1) {
@@ -49,7 +129,7 @@ export const ServiceProvider = ({ children }) => {
         cidade: selectedCidade,
         page: page.toString(),
         ...(searchTerm && { search_term: searchTerm }),
-        ...(selectedTag && { tag: selectedTag })
+        ...(tagToSearch && { tag: tagToSearch })
       };
 
       const data = await serviceAPI.searchProviders(params);
@@ -61,12 +141,19 @@ export const ServiceProvider = ({ children }) => {
       
       return { success: true };
     } catch (err) {
-      setError('Erro na busca');
+      setError('Erro na busca: ' + err.message);
       return { success: false, error: err.message };
     } finally {
       setLoading(false);
       setPaginationLoading(false);
     }
+  };
+
+  // Função para busca automática por tag
+  const searchByTag = async (tag) => {
+    setSelectedTag(tag);
+    setCurrentPageNum(1);
+    return await searchProviders(1, tag);
   };
 
   const loadClaimedProviders = async () => {
@@ -149,6 +236,17 @@ export const ServiceProvider = ({ children }) => {
 
   const clearError = () => setError('');
 
+  // Função para limpar busca
+  const clearSearch = () => {
+    setSelectedTag('');
+    setSearchTerm('');
+    setServiceProviders([]);
+    setTotalResults(0);
+    setTotalPages(1);
+    setCurrentPageNum(1);
+    setError('');
+  };
+
   const value = {
     // Estados
     serviceProviders,
@@ -164,15 +262,19 @@ export const ServiceProvider = ({ children }) => {
     selectedUf,
     selectedCidade,
     selectedTag,
+    availableLocations,
+    estados,
     
     // Setters
     setSearchTerm,
     setSelectedUf,
     setSelectedCidade,
     setSelectedTag,
+    handleLocationChange,
     
     // Ações
     searchProviders,
+    searchByTag,
     loadClaimedProviders,
     loadLikedProviders,
     likeProvider,
@@ -180,7 +282,8 @@ export const ServiceProvider = ({ children }) => {
     goToPage,
     nextPage,
     prevPage,
-    clearError
+    clearError,
+    clearSearch
   };
 
   return (
