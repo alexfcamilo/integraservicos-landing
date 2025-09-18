@@ -7,7 +7,7 @@ import MobileNavigation from '../components/layout/MobileNavigation';
 import ErrorMessage from '../components/common/ErrorMessage';
 import LoadingOverlay from '../components/common/LoadingOverlay';
 
-const SearchResults = ({ onNavigate, onOpenDetails }) => {
+const SearchResults = ({ onNavigate, onOpenDetails, onOpenLogin }) => {
   const {
     serviceProviders,
     loading,
@@ -30,7 +30,7 @@ const SearchResults = ({ onNavigate, onOpenDetails }) => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header onNavigate={onNavigate} onSearch={handleSearch} />
+      <Header onNavigate={onNavigate} onSearch={handleSearch} onOpenLogin={onOpenLogin} />
       
       <div className="max-w-6xl mx-auto px-4 py-8">
         <ErrorMessage error={error} onClear={clearError} />
@@ -70,6 +70,7 @@ const SearchResults = ({ onNavigate, onOpenDetails }) => {
                 provider={provider}
                 index={((currentPageNum - 1) * 10) + index + 1}
                 onOpenDetails={onOpenDetails}
+                onOpenLogin={onOpenLogin}
               />
             ))}
           </div>
@@ -104,7 +105,7 @@ const SearchResults = ({ onNavigate, onOpenDetails }) => {
         )}
       </div>
 
-      <MobileNavigation currentPage="search-results" onNavigate={onNavigate} />
+      <MobileNavigation currentPage="search-results" onNavigate={onNavigate} onOpenLogin={onOpenLogin} />
     </div>
   );
 };

@@ -1,15 +1,25 @@
 import React from 'react';
+import { useAuth } from '../../contexts/AuthContext';
 import { useService } from '../../contexts/ServiceContext';
 
-const MobileNavigation = ({ currentPage, onNavigate }) => {
+const MobileNavigation = ({ currentPage, onNavigate, onOpenLogin }) => {
+  const { isAuthenticated } = useAuth();
   const { loadClaimedProviders, loadLikedProviders } = useService();
 
   const handleClaimedClick = async () => {
+    if (!isAuthenticated) {
+      onOpenLogin();
+      return;
+    }
     await loadClaimedProviders();
     onNavigate('claimed-providers');
   };
 
   const handleLikedClick = async () => {
+    if (!isAuthenticated) {
+      onOpenLogin();
+      return;
+    }
     await loadLikedProviders();
     onNavigate('liked-providers');
   };
@@ -65,6 +75,9 @@ const MobileNavigation = ({ currentPage, onNavigate }) => {
           >
             {item.icon}
             <span className="text-xs">{item.label}</span>
+            {!isAuthenticated && (item.key === 'claimed-providers' || item.key === 'liked-providers') && (
+              <span className="text-xs text-gray-400">(Login)</span>
+            )}
           </button>
         ))}
       </div>

@@ -5,7 +5,7 @@ import HeroSection from '../components/sections/HeroSection';
 import SearchSection from '../components/sections/SearchSection';
 import MobileNavigation from '../components/layout/MobileNavigation';
 
-const Dashboard = ({ onNavigate, onOpenDetails }) => {
+const Dashboard = ({ onNavigate, onOpenDetails, onOpenLogin }) => {
   const { searchProviders } = useService();
 
   const handleSearch = async () => {
@@ -17,7 +17,7 @@ const Dashboard = ({ onNavigate, onOpenDetails }) => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header onNavigate={onNavigate} onSearch={handleSearch} />
+      <Header onNavigate={onNavigate} onSearch={handleSearch} onOpenLogin={onOpenLogin} />
       
       <HeroSection onNavigate={onNavigate} />
       
@@ -40,7 +40,7 @@ const Dashboard = ({ onNavigate, onOpenDetails }) => {
         </div>
       </div>
 
-      <MobileNavigation currentPage="dashboard" onNavigate={onNavigate} />
+      <MobileNavigation currentPage="dashboard" onNavigate={onNavigate} onOpenLogin={onOpenLogin} />
     </div>
   );
 };

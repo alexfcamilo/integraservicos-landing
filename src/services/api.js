@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:3000';
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:3000';
 
 // Utility function para fazer requests
 const apiRequest = async (endpoint, options = {}) => {
@@ -34,6 +34,28 @@ export const authAPI = {
 
   me: async () => {
     return apiRequest('/me');
+  },
+
+  // Novo: Atualizar dados da conta
+  updateAccount: async (accountData) => {
+    return apiRequest('/update-account', {
+      method: 'PUT',
+      body: JSON.stringify(accountData)
+    });
+  },
+
+  // Novo: Excluir conta
+  deleteAccount: async () => {
+    return apiRequest('/delete-account', {
+      method: 'DELETE'
+    });
+  },
+
+  // Novo: Cancelar premium
+  cancelPremium: async () => {
+    return apiRequest('/cancel-premium', {
+      method: 'POST'
+    });
   }
 };
 

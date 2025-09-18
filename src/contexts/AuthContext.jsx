@@ -28,6 +28,7 @@ export const AuthProvider = ({ children }) => {
         setUser(userData);
         setIsAuthenticated(true);
       } catch (error) {
+        console.error('Erro ao verificar autenticação:', error);
         localStorage.removeItem('token');
         setIsAuthenticated(false);
         setUser(null);
@@ -60,13 +61,69 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
+  // Novo: Atualizar dados da conta
+  const updateAccount = async (accountData) => {
+    try {
+      const response = await authAPI.updateAccount(accountData);
+      
+      // Recarregar dados do usuário após atualização
+      const updatedUserData = await authAPI.me();
+      setUser(updatedUserData);
+      
+      return { success: true, data: response };
+    } catch (error) {
+      return { 
+        success: false, 
+        error: error.message || 'Erro ao atualizar conta' 
+      };
+    }
+  };
+
+  // Novo: Excluir conta
+  const deleteAccount = async () => {
+    try {
+      await authAPI.deleteAccount();
+      
+      // Fazer logout após exclusão bem-sucedida
+      logout();
+      
+      return { success: true };
+    } catch (error) {
+      return { 
+        success: false, 
+        error: error.message || 'Erro ao excluir conta' 
+      };
+    }
+  };
+
+  // Novo: Cancelar premium
+  const cancelPremium = async () => {
+    try {
+      const response = await authAPI.cancelPremium();
+      
+      // Recarregar dados do usuário para atualizar status premium
+      const updatedUserData = await authAPI.me();
+      setUser(updatedUserData);
+      
+      return { success: true, data: response };
+    } catch (error) {
+      return { 
+        success: false, 
+        error: error.message || 'Erro ao cancelar plano premium' 
+      };
+    }
+  };
+
   const value = {
     isAuthenticated,
     user,
     loading,
     login,
     logout,
-    checkAuthStatus
+    checkAuthStatus,
+    updateAccount,
+    deleteAccount,
+    cancelPremium
   };
 
   return (

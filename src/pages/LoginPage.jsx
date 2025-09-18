@@ -1,12 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import LoadingSpinner from '../components/common/LoadingSpinner';
+import RegisterPage from '../pages/RegisterPage';
+import ForgotPasswordPage from '../pages/ForgotPasswordPage';
+import ResetPasswordPage from '../pages/ResetPasswordPage';
 
-const LoginPage = () => {
+const LoginPage = ({ onClose }) => {
   const { login } = useAuth();
   const [loginData, setLoginData] = useState({ email: '', password: '' });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [currentView, setCurrentView] = useState('login'); // login, register, forgot, reset
+  const [resetEmail, setResetEmail] = useState('');
+
+  useEffect(() => {
+    const handleEsc = (event) => {
+      if (event.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleEsc);
+    return () => window.removeEventListener('keydown', handleEsc);
+  }, [onClose]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,7 +28,9 @@ const LoginPage = () => {
 
     const result = await login(loginData);
     
-    if (!result.success) {
+    if (result.success) {
+      onClose(); // Fecha o modal após login bem-sucedido
+    } else {
       setError(result.error);
     }
     
@@ -28,20 +43,67 @@ const LoginPage = () => {
     }
   };
 
+  // Renderizar diferentes componentes baseado na view atual
+  if (currentView === 'register') {
+    return (
+      <RegisterPage 
+        onClose={onClose}
+        onSwitchToLogin={() => setCurrentView('login')}
+      />
+    );
+  }
+
+  if (currentView === 'forgot') {
+    return (
+      <ForgotPasswordPage 
+        onClose={onClose}
+        onSwitchToLogin={() => setCurrentView('login')}
+        onSwitchToReset={(email) => {
+          setResetEmail(email);
+          setCurrentView('reset');
+        }}
+      />
+    );
+  }
+
+  if (currentView === 'reset') {
+    return (
+      <ResetPasswordPage 
+        onClose={onClose}
+        email={resetEmail}
+        onSwitchToLogin={() => setCurrentView('login')}
+      />
+    );
+  }
+
+  // View padrão de login
   return (
-    <div className="min-h-screen bg-gradient-to-br from-teal-500 to-teal-700 flex items-center justify-center">
-      <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full mx-4">
-        <div className="text-center mb-8">
-          <div className="flex items-center justify-center space-x-2 mb-4">
-            <div className="w-10 h-10 bg-teal-500 rounded-full flex items-center justify-center">
-              <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+    <div 
+      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+      onClick={onClose}
+    >
+      <div 
+        className="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full mx-4"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex justify-between items-center mb-6">
+          <div className="flex items-center space-x-2">
+            <div className="w-8 h-8 bg-teal-500 rounded-full flex items-center justify-center">
+              <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
               </svg>
             </div>
-            <h1 className="text-3xl font-bold text-gray-800">ConectaServiços</h1>
+            <h1 className="text-2xl font-bold text-gray-800">Login</h1>
           </div>
-          <p className="text-gray-600">Faça login para acessar a plataforma</p>
+          <button
+            onClick={onClose}
+            className="text-gray-400 hover:text-gray-600 text-2xl font-bold"
+          >
+            ×
+          </button>
         </div>
+
+        <p className="text-gray-600 mb-6 text-center">Faça login para acessar recursos exclusivos</p>
 
         {error && (
           <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
@@ -95,6 +157,25 @@ const LoginPage = () => {
             )}
           </button>
         </form>
+
+        <div className="mt-6 space-y-3 text-center">
+          <button
+            onClick={() => setCurrentView('forgot')}
+            className="text-teal-600 hover:text-teal-700 font-medium text-sm block w-full"
+          >
+            Esqueci minha senha
+          </button>
+          
+          <p className="text-gray-600 text-sm">
+            Não tem uma conta?{' '}
+            <button 
+              onClick={() => setCurrentView('register')}
+              className="text-teal-600 hover:text-teal-700 font-medium"
+            >
+              Criar conta
+            </button>
+          </p>
+        </div>
       </div>
     </div>
   );

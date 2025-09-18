@@ -13,6 +13,7 @@ const AppRouter = () => {
   const [currentPage, setCurrentPage] = useState('dashboard');
   const [selectedProvider, setSelectedProvider] = useState(null);
   const [showServiceDetails, setShowServiceDetails] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
 
   const openServiceDetails = (provider) => {
     setSelectedProvider(provider);
@@ -24,12 +25,21 @@ const AppRouter = () => {
     setSelectedProvider(null);
   };
 
+  const openLogin = () => {
+    setShowLogin(true);
+  };
+
+  const closeLogin = () => {
+    setShowLogin(false);
+  };
+
   if (loading) {
     return <LoadingSpinner />;
   }
 
-  if (!isAuthenticated) {
-    return <LoginPage />;
+  // Se o modal de login estiver aberto, mostrar ele
+  if (showLogin && !isAuthenticated) {
+    return <LoginPage onClose={closeLogin} />;
   }
 
   const renderPage = () => {
@@ -39,6 +49,7 @@ const AppRouter = () => {
           <Dashboard 
             onNavigate={setCurrentPage}
             onOpenDetails={openServiceDetails}
+            onOpenLogin={openLogin}
           />
         );
       case 'search-results':
@@ -46,9 +57,15 @@ const AppRouter = () => {
           <SearchResults 
             onNavigate={setCurrentPage}
             onOpenDetails={openServiceDetails}
+            onOpenLogin={openLogin}
           />
         );
       case 'claimed-providers':
+        if (!isAuthenticated) {
+          setCurrentPage('dashboard');
+          setShowLogin(true);
+          return null;
+        }
         return (
           <ClaimedProviders 
             onNavigate={setCurrentPage}
@@ -56,6 +73,11 @@ const AppRouter = () => {
           />
         );
       case 'liked-providers':
+        if (!isAuthenticated) {
+          setCurrentPage('dashboard');
+          setShowLogin(true);
+          return null;
+        }
         return (
           <LikedProviders 
             onNavigate={setCurrentPage}
@@ -67,6 +89,7 @@ const AppRouter = () => {
           <Dashboard 
             onNavigate={setCurrentPage}
             onOpenDetails={openServiceDetails}
+            onOpenLogin={openLogin}
           />
         );
     }
