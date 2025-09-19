@@ -18,7 +18,7 @@ const Pagination = ({
         <button
           onClick={onPrev}
           disabled={currentPage === 1 || loading}
-          className="px-4 py-2 bg-teal-600 text-white rounded disabled:bg-gray-300 disabled:cursor-not-allowed hover:bg-teal-700 transition duration-300"
+          className="px-4 py-2 bg-blue-600 text-white rounded disabled:bg-gray-300 disabled:cursor-not-allowed hover:bg-blue-700 transition duration-300"
         >
           Anterior
         </button>
@@ -29,7 +29,7 @@ const Pagination = ({
         <button
           onClick={onNext}
           disabled={currentPage === totalPages || loading}
-          className="px-4 py-2 bg-teal-600 text-white rounded disabled:bg-gray-300 disabled:cursor-not-allowed hover:bg-teal-700 transition duration-300"
+          className="px-4 py-2 bg-blue-600 text-white rounded disabled:bg-gray-300 disabled:cursor-not-allowed hover:bg-blue-700 transition duration-300"
         >
           Próxima
         </button>
@@ -42,7 +42,7 @@ const Pagination = ({
       <button
         onClick={onPrev}
         disabled={currentPage === 1 || loading}
-        className="px-4 py-2 bg-teal-600 text-white rounded disabled:bg-gray-300 disabled:cursor-not-allowed hover:bg-teal-700 transition duration-300 flex items-center space-x-2"
+        className="px-4 py-2 bg-blue-600 text-white rounded disabled:bg-gray-300 disabled:cursor-not-allowed hover:bg-blue-700 transition duration-300 flex items-center space-x-2"
       >
         {loading && currentPage > 1 ? (
           <LoadingSpinner size="sm" />
@@ -57,7 +57,7 @@ const Pagination = ({
             <button
               onClick={() => onPageChange(1)}
               disabled={loading}
-              className="px-3 py-2 border rounded transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 border-gray-300"
+              className="px-3 py-2 border rounded transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-blue-50 border-blue-300 text-blue-600"
             >
               1
             </button>
@@ -78,8 +78,8 @@ const Pagination = ({
                 disabled={loading}
                 className={`px-3 py-2 border rounded transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed ${
                   pageNum === currentPage
-                    ? 'bg-teal-600 text-white border-teal-600'
-                    : 'hover:bg-gray-100 border-gray-300'
+                    ? 'bg-blue-600 text-white border-blue-600'
+                    : 'hover:bg-blue-50 border-blue-300 text-blue-600'
                 }`}
               >
                 {pageNum}
@@ -96,7 +96,7 @@ const Pagination = ({
             <button
               onClick={() => onPageChange(totalPages)}
               disabled={loading}
-              className="px-3 py-2 border rounded hover:bg-gray-100 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed border-gray-300"
+              className="px-3 py-2 border rounded hover:bg-blue-50 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed border-blue-300 text-blue-600"
             >
               {totalPages}
             </button>
@@ -107,7 +107,7 @@ const Pagination = ({
       <button
         onClick={onNext}
         disabled={currentPage === totalPages || loading}
-        className="px-4 py-2 bg-teal-600 text-white rounded disabled:bg-gray-300 disabled:cursor-not-allowed hover:bg-teal-700 transition duration-300 flex items-center space-x-2"
+        className="px-4 py-2 bg-blue-600 text-white rounded disabled:bg-gray-300 disabled:cursor-not-allowed hover:bg-blue-700 transition duration-300 flex items-center space-x-2"
       >
         <span>Próxima</span>
         {loading && currentPage < totalPages ? (

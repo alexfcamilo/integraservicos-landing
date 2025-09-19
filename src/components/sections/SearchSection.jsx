@@ -25,19 +25,14 @@ const SearchSection = ({ onSearch }) => {
       return;
     }
 
-    // Busca automaticamente pela categoria
-    const result = await searchByTag(category);
-    
-    // Se a busca foi bem-sucedida, navega para resultados
-    if (result.success && onSearch) {
-      onSearch();
-    }
+    // Busca automaticamente pela categoria (mantém na mesma página)
+    await searchByTag(category);
   };
 
   return (
     <div className="bg-gray-50 -mt-16 relative z-10">
       <div className="max-w-4xl mx-auto px-4">
-        <div className="bg-gray-800 rounded-lg p-6 shadow-lg">
+        <div className="search-section-bg rounded-lg p-6 shadow-lg">
           <h2 className="text-white text-xl font-semibold mb-4">
             Procurando uma categoria específica?
           </h2>
@@ -77,7 +72,7 @@ const SearchSection = ({ onSearch }) => {
           </div>
 
           {selectedTag && (
-            <div className="mt-4 p-3 bg-teal-600 rounded-lg">
+            <div className="mt-4 p-3 bg-blue-600 rounded-lg">
               <div className="flex items-center justify-between text-white">
                 <div className="flex items-center space-x-2">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -33,60 +33,12 @@ export const ServiceProvider = ({ children }) => {
   // Cidades disponíveis por estado (expandir conforme necessário)
   const availableLocations = {
     'PR': [
-      'Campo Largo',
-      'Curitiba',
-      'São José dos Pinhais',
-      'Pinhais',
-      'Colombo',
-      'Almirante Tamandaré',
-      'Fazenda Rio Grande',
-      'Araucária',
-      'Piraquara',
-      'Quatro Barras'
-    ],
-    'SP': [
-      'São Paulo',
-      'Guarulhos',
-      'Campinas',
-      'São Bernardo do Campo',
-      'Santo André',
-      'Osasco',
-      'Sorocaba',
-      'Ribeirão Preto',
-      'Santos',
-      'Mauá'
-    ],
-    'RJ': [
-      'Rio de Janeiro',
-      'São Gonçalo',
-      'Duque de Caxias',
-      'Nova Iguaçu',
-      'Niterói',
-      'Belford Roxo',
-      'São João de Meriti',
-      'Campos dos Goytacazes',
-      'Petrópolis',
-      'Volta Redonda'
-    ],
-    'MG': [
-      'Belo Horizonte',
-      'Uberlândia',
-      'Contagem',
-      'Juiz de Fora',
-      'Betim',
-      'Montes Claros',
-      'Ribeirão das Neves',
-      'Uberaba',
-      'Governador Valadares',
-      'Ipatinga'
+      'Campo Largo'
     ]
   };
 
   const estados = [
-    { code: 'PR', name: 'Paraná' },
-    { code: 'SP', name: 'São Paulo' },
-    { code: 'RJ', name: 'Rio de Janeiro' },
-    { code: 'MG', name: 'Minas Gerais' }
+    { code: 'PR', name: 'Paraná' }
   ];
 
   const handleLocationChange = (newUf, newCidade = null) => {

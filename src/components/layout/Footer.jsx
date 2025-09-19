@@ -7,7 +7,7 @@ const Footer = () => {
 
   const TermsContent = () => (
     <div className="prose prose-sm max-w-none">
-      <h3 className="text-xl font-bold text-teal-500 mb-4">Termos de Uso do ConectaServiços</h3>
+      <h3 className="text-xl font-bold text-blue-600 mb-4">Termos de Uso do ConectaServiços</h3>
       <p className="text-sm text-gray-500 italic mb-4">Última atualização: 15 de junho de 2025</p>
       
       <p className="mb-4">
@@ -75,7 +75,7 @@ const Footer = () => {
       <h4 className="text-lg font-bold mb-2">6. Contato</h4>
       <p>
         Em caso de dúvida, denúncias ou solicitações, entre em contato conosco pelo e-mail:{' '}
-        <a href="mailto:suporte@conectaservicos.com" className="text-teal-500 hover:text-teal-600">
+        <a href="mailto:suporte@conectaservicos.com" className="text-blue-600 hover:text-blue-700">
           suporte@conectaservicos.com
         </a>
       </p>
@@ -84,7 +84,7 @@ const Footer = () => {
 
   const PrivacyContent = () => (
     <div className="prose prose-sm max-w-none">
-      <h3 className="text-xl font-bold text-teal-500 mb-4">Política de Privacidade do ConectaServiços</h3>
+      <h3 className="text-xl font-bold text-blue-600 mb-4">Política de Privacidade do ConectaServiços</h3>
       <p className="text-sm text-gray-500 italic mb-4">Última atualização: 15 de junho de 2025</p>
       
       <p className="mb-4">
@@ -150,7 +150,7 @@ const Footer = () => {
       <p>
         Para dúvidas sobre dados pessoais e privacidade, entre em contato com nosso 
         suporte, pelo e-mail{' '}
-        <a href="mailto:suporte@conectaservicos.com" className="text-teal-500 hover:text-teal-600">
+        <a href="mailto:suporte@conectaservicos.com" className="text-blue-600 hover:text-blue-700">
           suporte@conectaservicos.com
         </a>
       </p>
@@ -159,13 +159,13 @@ const Footer = () => {
 
   return (
     <>
-      <footer className="bg-gray-800 text-white py-8 mt-16">
+      <footer className="bg-slate-800 text-white py-8 mt-16">
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-8">
             {/* Logo e Descrição */}
             <div>
               <div className="flex items-center space-x-2 mb-4">
-                <div className="w-8 h-8 bg-teal-500 rounded-full flex items-center justify-center">
+                <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-blue-500 rounded-full flex items-center justify-center">
                   <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                   </svg>
@@ -185,7 +185,7 @@ const Footer = () => {
                 <li>
                   <button
                     onClick={() => setShowTerms(true)}
-                    className="text-gray-300 hover:text-white transition-colors text-sm underline"
+                    className="text-blue-300 hover:text-blue-200 transition-colors text-sm underline"
                   >
                     Termos de Uso
                   </button>
@@ -193,7 +193,7 @@ const Footer = () => {
                 <li>
                   <button
                     onClick={() => setShowPrivacy(true)}
-                    className="text-gray-300 hover:text-white transition-colors text-sm underline"
+                    className="text-blue-300 hover:text-blue-200 transition-colors text-sm underline"
                   >
                     Política de Privacidade
                   </button>
@@ -223,7 +223,7 @@ const Footer = () => {
           </div>
 
           {/* Linha divisória e Copyright */}
-          <div className="border-t border-gray-700 mt-8 pt-8 text-center">
+          <div className="border-t border-slate-700 mt-8 pt-8 text-center">
             <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
               <p className="text-gray-400 text-sm text-center md:text-left">
                 © {new Date().getFullYear()} ConectaServiços. Todos os direitos reservados.

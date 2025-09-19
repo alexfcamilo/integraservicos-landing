@@ -5,24 +5,18 @@ import Dashboard from '../pages/Dashboard';
 import SearchResults from '../pages/SearchResults';
 import ClaimedProviders from '../pages/ClaimedProviders';
 import LikedProviders from '../pages/LikedProviders';
-import ServiceDetailsPage from './ServiceDetailsPage';
+import ProviderDetailsPage from '../pages/ProviderDetailsPage';
 import LoadingSpinner from './common/LoadingSpinner';
 
 const AppRouter = () => {
   const { isAuthenticated, loading } = useAuth();
   const [currentPage, setCurrentPage] = useState('dashboard');
   const [selectedProvider, setSelectedProvider] = useState(null);
-  const [showServiceDetails, setShowServiceDetails] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
 
-  const openServiceDetails = (provider) => {
+  const openProviderDetails = (provider) => {
     setSelectedProvider(provider);
-    setShowServiceDetails(true);
-  };
-
-  const closeServiceDetails = () => {
-    setShowServiceDetails(false);
-    setSelectedProvider(null);
+    setCurrentPage('provider-details');
   };
 
   const openLogin = () => {
@@ -31,6 +25,13 @@ const AppRouter = () => {
 
   const closeLogin = () => {
     setShowLogin(false);
+  };
+
+  const handleNavigate = (page) => {
+    setCurrentPage(page);
+    if (page !== 'provider-details') {
+      setSelectedProvider(null);
+    }
   };
 
   if (loading) {
@@ -54,16 +55,16 @@ const AppRouter = () => {
       case 'dashboard':
         return (
           <Dashboard 
-            onNavigate={setCurrentPage}
-            onOpenDetails={openServiceDetails}
+            onNavigate={handleNavigate}
+            onOpenDetails={openProviderDetails}
             onOpenLogin={openLogin}
           />
         );
       case 'search-results':
         return (
           <SearchResults 
-            onNavigate={setCurrentPage}
-            onOpenDetails={openServiceDetails}
+            onNavigate={handleNavigate}
+            onOpenDetails={openProviderDetails}
             onOpenLogin={openLogin}
           />
         );
@@ -75,8 +76,8 @@ const AppRouter = () => {
         }
         return (
           <ClaimedProviders 
-            onNavigate={setCurrentPage}
-            onOpenDetails={openServiceDetails}
+            onNavigate={handleNavigate}
+            onOpenDetails={openProviderDetails}
           />
         );
       case 'liked-providers':
@@ -87,37 +88,34 @@ const AppRouter = () => {
         }
         return (
           <LikedProviders 
-            onNavigate={setCurrentPage}
-            onOpenDetails={openServiceDetails}
+            onNavigate={handleNavigate}
+            onOpenDetails={openProviderDetails}
+          />
+        );
+      case 'provider-details':
+        if (!selectedProvider) {
+          setCurrentPage('dashboard');
+          return null;
+        }
+        return (
+          <ProviderDetailsPage
+            provider={selectedProvider}
+            onNavigate={handleNavigate}
+            onOpenLogin={openLogin}
           />
         );
       default:
         return (
           <Dashboard 
-            onNavigate={setCurrentPage}
-            onOpenDetails={openServiceDetails}
+            onNavigate={handleNavigate}
+            onOpenDetails={openProviderDetails}
             onOpenLogin={openLogin}
           />
         );
     }
   };
 
-  return (
-    <>
-      {renderPage()}
-      {showServiceDetails && selectedProvider && (
-        <ServiceDetailsPage
-          serviceProvider={selectedProvider}
-          onClose={closeServiceDetails}
-          onProviderUpdated={(updatedProvider) => {
-            // Propagate update to parent context if needed
-            // This will be handled by the ServiceContext
-          }}
-          isGuest={!isAuthenticated}
-        />
-      )}
-    </>
-  );
+  return renderPage();
 };
 
 export default AppRouter;

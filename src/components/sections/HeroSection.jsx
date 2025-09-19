@@ -4,13 +4,16 @@ const HeroSection = ({ onNavigate }) => {
   return (
     <>
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white">
+      <div className="hero-gradient text-white">
         <div className="max-w-6xl mx-auto px-4 py-16">
           <div className="text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
               Encontre as melhores empresas<br />
               separadas por categoria
             </h1>
+            <p className="text-blue-100 text-lg md:text-xl mb-8 max-w-2xl mx-auto">
+              Conecte-se com prestadores de serviços qualificados da sua região
+            </p>
           </div>
         </div>
         
