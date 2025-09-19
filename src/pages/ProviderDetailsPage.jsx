@@ -164,7 +164,7 @@ const ProviderDetailsPage = ({ provider, onNavigate, onOpenLogin }) => {
             <div className="flex items-center space-x-2 text-sm text-gray-600">
               <button 
                 onClick={() => onNavigate('dashboard')}
-                className="hover:text-teal-600 transition-colors"
+                className="hover:text-blue-600 transition-colors"
               >
                 Início
               </button>
@@ -367,7 +367,7 @@ const ProviderDetailsPage = ({ provider, onNavigate, onOpenLogin }) => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {currentProvider.servicos_prestados.map((servico, index) => (
                       <div key={index} className="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg">
-                        <svg className="w-4 h-4 text-teal-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-4 h-4 text-blue-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                         </svg>
                         <span className="text-gray-700">{servico}</span>
@@ -393,7 +393,7 @@ const ProviderDetailsPage = ({ provider, onNavigate, onOpenLogin }) => {
                       maxLength={200}
                       rows={3}
                       placeholder="Compartilhe sua experiência com esta empresa..."
-                      className="w-full p-3 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="w-full p-3 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                     <div className="flex justify-between items-center mt-2">
                       <span className="text-sm text-gray-500">{newComment.length}/200</span>
@@ -457,48 +457,52 @@ const ProviderDetailsPage = ({ provider, onNavigate, onOpenLogin }) => {
                 
                 <div className="space-y-4">
                   {currentProvider.telefone_1 && (
-                    <div className="flex items-center justify-between p-3 contact-card-phone rounded-lg">
-                      <div className="flex items-center space-x-3 flex-1">
-                        <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                        </svg>
-                        <div className="flex-1 min-w-0">
-                          <p className="text-sm text-gray-600">Telefone</p>
-                          <p className="font-medium text-gray-900">{currentProvider.telefone_1}</p>
+                    <div className="p-3 bg-green-50 border border-green-200 rounded-lg">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-3 flex-1 min-w-0">
+                          <svg className="w-5 h-5 text-green-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                          </svg>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm text-gray-600">Telefone</p>
+                            <p className="font-medium text-gray-900">{currentProvider.telefone_1}</p>
+                          </div>
                         </div>
+                        <button 
+                          onClick={() => copyToClipboard(currentProvider.telefone_1, 'Telefone')}
+                          className="text-green-600 hover:text-green-700 p-1 flex-shrink-0"
+                          title="Copiar telefone"
+                        >
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                          </svg>
+                        </button>
                       </div>
-                      <button 
-                        onClick={() => copyToClipboard(currentProvider.telefone_1, 'Telefone')}
-                        className="text-green-600 hover:text-green-700 p-1 ml-2 flex-shrink-0"
-                        title="Copiar telefone"
-                      >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                        </svg>
-                      </button>
                     </div>
                   )}
 
                   {currentProvider.correio_eletronico && (
-                    <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
-                      <div className="flex items-center space-x-3 flex-1">
-                        <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                        </svg>
-                        <div className="flex-1 min-w-0">
-                          <p className="text-sm text-gray-600">E-mail</p>
-                          <p className="font-medium text-gray-900 truncate">{currentProvider.correio_eletronico}</p>
+                    <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-3 flex-1 min-w-0">
+                          <svg className="w-5 h-5 text-blue-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                          </svg>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm text-gray-600">E-mail</p>
+                            <p className="font-medium text-gray-900 break-all">{currentProvider.correio_eletronico}</p>
+                          </div>
                         </div>
+                        <button 
+                          onClick={() => copyToClipboard(currentProvider.correio_eletronico, 'E-mail')}
+                          className="text-blue-600 hover:text-blue-700 p-1 flex-shrink-0"
+                          title="Copiar e-mail"
+                        >
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                          </svg>
+                        </button>
                       </div>
-                      <button 
-                        onClick={() => copyToClipboard(currentProvider.correio_eletronico, 'E-mail')}
-                        className="text-blue-600 hover:text-blue-700 p-1 ml-2 flex-shrink-0"
-                        title="Copiar e-mail"
-                      >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                        </svg>
-                      </button>
                     </div>
                   )}
 
@@ -518,10 +522,10 @@ const ProviderDetailsPage = ({ provider, onNavigate, onOpenLogin }) => {
 
                 {/* Botões de Ação */}
                 <div className="mt-6 space-y-3">
-                  <button className="w-full bg-teal-600 hover:bg-teal-700 text-white font-medium py-3 px-4 rounded-lg transition duration-300">
+                  <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition duration-300">
                     Solicitar Orçamento
                   </button>
-                  <button className="w-full border border-teal-600 text-teal-600 hover:bg-teal-50 font-medium py-3 px-4 rounded-lg transition duration-300">
+                  <button className="w-full border border-blue-600 text-blue-600 hover:bg-blue-50 font-medium py-3 px-4 rounded-lg transition duration-300">
                     Compartilhar
                   </button>
                 </div>

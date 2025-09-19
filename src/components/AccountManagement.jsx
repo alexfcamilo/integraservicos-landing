@@ -262,7 +262,7 @@ const AccountManagement = ({ isOpen, onClose }) => {
                     type="text"
                     value={formData.firstName}
                     onChange={(e) => handleInputChange('firstName', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     disabled={loading}
                   />
                 </div>
@@ -274,7 +274,7 @@ const AccountManagement = ({ isOpen, onClose }) => {
                     type="text"
                     value={formData.lastName}
                     onChange={(e) => handleInputChange('lastName', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     disabled={loading}
                   />
                 </div>
@@ -290,7 +290,7 @@ const AccountManagement = ({ isOpen, onClose }) => {
                     type="text"
                     value={formData.city}
                     onChange={(e) => handleInputChange('city', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     disabled={loading}
                   />
                 </div>
@@ -302,7 +302,7 @@ const AccountManagement = ({ isOpen, onClose }) => {
                     type="text"
                     value={formData.state}
                     onChange={(e) => handleInputChange('state', e.target.value.toUpperCase())}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     maxLength={2}
                     placeholder="SP"
                     disabled={loading}
@@ -319,7 +319,7 @@ const AccountManagement = ({ isOpen, onClose }) => {
                   type="email"
                   value={formData.email}
                   onChange={(e) => handleInputChange('email', e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   disabled={loading}
                 />
               </div>
@@ -337,7 +337,7 @@ const AccountManagement = ({ isOpen, onClose }) => {
                       type="password"
                       value={formData.currentPassword}
                       onChange={(e) => handleInputChange('currentPassword', e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                       disabled={loading}
                     />
                   </div>
@@ -350,7 +350,7 @@ const AccountManagement = ({ isOpen, onClose }) => {
                       type="password"
                       value={formData.newPassword}
                       onChange={(e) => handleInputChange('newPassword', e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                       disabled={loading}
                     />
                     {validationMessage && (
@@ -371,7 +371,7 @@ const AccountManagement = ({ isOpen, onClose }) => {
                 <button
                   onClick={handleSave}
                   disabled={loading}
-                  className="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300 disabled:opacity-50 flex items-center justify-center"
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300 disabled:opacity-50 flex items-center justify-center"
                 >
                   {loading ? (
                     <>

@@ -81,7 +81,7 @@ const ResetPasswordPage = ({ onClose, email, onSwitchToLogin }) => {
       >
         <div className="flex justify-between items-center mb-6">
           <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-teal-500 rounded-full flex items-center justify-center">
+            <div className="w-8 h-8 bg-gradient-to-r from-blue-800 to-blue-600 rounded-full flex items-center justify-center">
               <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
               </svg>
@@ -122,7 +122,7 @@ const ResetPasswordPage = ({ onClose, email, onSwitchToLogin }) => {
               value={formData.resetCode}
               onChange={handleChange}
               placeholder="Digite o código recebido por e-mail"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
               disabled={loading}
             />
@@ -138,7 +138,7 @@ const ResetPasswordPage = ({ onClose, email, onSwitchToLogin }) => {
                 name="newPassword"
                 value={formData.newPassword}
                 onChange={handleChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 pr-12"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 pr-12"
                 required
                 disabled={loading}
               />
@@ -167,7 +167,7 @@ const ResetPasswordPage = ({ onClose, email, onSwitchToLogin }) => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300 disabled:opacity-50 flex items-center justify-center"
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300 disabled:opacity-50 flex items-center justify-center"
           >
             {loading ? (
               <>
@@ -185,7 +185,7 @@ const ResetPasswordPage = ({ onClose, email, onSwitchToLogin }) => {
             Lembrou da sua senha?{' '}
             <button 
               onClick={onSwitchToLogin}
-              className="text-teal-600 hover:text-teal-700 font-medium"
+              className="text-blue-600 hover:text-blue-700 font-medium"
             >
               Fazer login
             </button>
