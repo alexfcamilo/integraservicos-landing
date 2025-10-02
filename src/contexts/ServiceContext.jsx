@@ -84,7 +84,11 @@ export const ServiceProvider = ({ children }) => {
         ...(tagToSearch && { tag: tagToSearch })
       };
 
+      console.log('📤 Params enviados para API:', params);
+
       const data = await serviceAPI.searchProviders(params);
+
+      console.log('📥 Resposta da API:', data);
       
       setServiceProviders(data.providers || []);
       setTotalResults(data.total || 0);
@@ -93,6 +97,8 @@ export const ServiceProvider = ({ children }) => {
       
       return { success: true };
     } catch (err) {
+
+      console.error('❌ Erro na busca:', err);
       setError('Erro na busca: ' + err.message);
       return { success: false, error: err.message };
     } finally {

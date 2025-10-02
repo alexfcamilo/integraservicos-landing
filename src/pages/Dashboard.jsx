@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react'; // ADICIONE useState aqui
 import { useService } from '../contexts/ServiceContext';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
@@ -8,8 +8,12 @@ import ServiceProviderCard from '../components/cards/ServiceProviderCard';
 import Pagination from '../components/common/Pagination';
 import ErrorMessage from '../components/common/ErrorMessage';
 import LoadingOverlay from '../components/common/LoadingOverlay';
+import Toast from '../components/common/Toast'; // ADICIONE esta linha
 
 const Dashboard = ({ onNavigate, onOpenDetails, onOpenLogin }) => {
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
+
   const { 
     selectedCidade, 
     selectedUf,
@@ -29,14 +33,25 @@ const Dashboard = ({ onNavigate, onOpenDetails, onOpenLogin }) => {
   } = useService();
 
   const handleSearch = async () => {
-    // Não navega mais para resultados, mantém na mesma página
+    setToastMessage('Buscando prestadores...');
+    setShowToast(true);
     await searchProviders(1);
+    setShowToast(false);
   };
 
   const hasResults = serviceProviders.length > 0;
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
+      
+      {showToast && (
+        <Toast 
+          message={toastMessage} 
+          type="info" 
+          onClose={() => setShowToast(false)}
+        />
+      )}
+
       <Header 
         onNavigate={onNavigate} 
         onSearch={handleSearch} 
