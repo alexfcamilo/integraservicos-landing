@@ -13,9 +13,9 @@ const SearchSection = ({ onSearch }) => {
   } = useService();
 
   const categories = [
-    'Pedreiro', 'Eletricista', 'Encanador', 'Pintor', 'Marceneiro',
-    'Mecânico', 'Cabeleireiro', 'Manicure', 'Dentista', 'Advogado',
-    'Contador', 'Arquiteto', 'Engenheiro', 'Médico', 'Veterinário'
+    'Construção e Reformas', 'Instalações e Manutenção', 'Para a Casa', 'Para a Família', 'Para os Pets',
+    'Cabelos', 'Unhas', 'Depilação', 'Maquiagem', 'Massagem e Estética','Sobrancelhas e Cílios',
+    'Barbearia', 'Podologia', 'Bronzeamento', 'Corte e Costura', 'Sapateiro', 'Personal Stylist', 'Visagismo'
   ];
 
   const handleCategoryClick = async (category) => {
