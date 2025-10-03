@@ -13,9 +13,29 @@ const SearchSection = ({ onSearch }) => {
   } = useService();
 
   const categories = [
-    'Construção e Reformas', 'Instalações e Manutenção', 'Para a Casa', 'Para a Família', 'Para os Pets',
-    'Cabelos', 'Unhas', 'Depilação', 'Maquiagem', 'Massagem e Estética','Sobrancelhas e Cílios',
-    'Barbearia', 'Podologia', 'Bronzeamento', 'Corte e Costura', 'Sapateiro', 'Personal Stylist', 'Visagismo'
+    'Barbearia',
+'Salão de Beleza',
+'Manicure',
+'Depilação',
+'Maquiagem',
+'Massagem',
+'Sobrancelha e Cílios',
+'Podologia',
+'Bronzeamento',
+'Estética',
+'Alfaiataria',
+'Corte e Costura',
+'Sapataria',
+'Personal Stylist / Consultoria de Imagem',
+'Visagismo',
+'Limpeza Residencial',
+'Passadoria de Roupas',
+'Organização de Ambientes',
+'Transporte Particular',
+'Adestramento',
+'Pet Shop',
+'Clinica Veterinária',
+'Creche para cães'
   ];
 
   const handleCategoryClick = async (category) => {
