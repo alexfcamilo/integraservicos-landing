@@ -53,6 +53,9 @@ const RegisterPage = ({ onClose, onSwitchToLogin }) => {
     }
 
     try {
+      console.log('Tentando registrar com:', { ...formData, password: '***' });
+      console.log('URL:', `${API_BASE_URL}/register`);
+      
       const response = await fetch(`${API_BASE_URL}/register`, {
         method: 'POST',
         headers: {
@@ -60,6 +63,24 @@ const RegisterPage = ({ onClose, onSwitchToLogin }) => {
         },
         body: JSON.stringify(formData),
       });
+
+      console.log('Response status:', response.status);
+      console.log('Response headers:', Object.fromEntries(response.headers.entries()));
+
+      if (response.status === 405) {
+        setError('Erro 405: Método não permitido. Verifique a configuração CORS do servidor.');
+        setLoading(false);
+        return;
+      }
+
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        const text = await response.text();
+        console.error('Resposta não é JSON:', text.substring(0, 200));
+        setError('Erro: O servidor retornou uma resposta inválida (não é JSON)');
+        setLoading(false);
+        return;
+      }
 
       const data = await response.json();
 
@@ -70,7 +91,8 @@ const RegisterPage = ({ onClose, onSwitchToLogin }) => {
         setError(data.error || 'Erro ao cadastrar');
       }
     } catch (err) {
-      setError('Erro de conexão. Tente novamente.');
+      console.error('Erro ao registrar:', err);
+      setError(`Erro de conexão: ${err.message}`);
     } finally {
       setLoading(false);
     }

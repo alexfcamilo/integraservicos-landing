@@ -1,6 +1,16 @@
 //const API_BASE_URL = 'https://conectas-production.up.railway.app';
 
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;// || 'http://localhost:3000';
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'https://conectas-production.up.railway.app';
+// || 'http://localhost:3000';
+
+console.log('🔍 API_BASE_URL carregado:', API_BASE_URL);
+console.log('🔍 process.env:', process.env);
+
+// Se estiver undefined, use um fallback temporário para teste
+if (!API_BASE_URL) {
+  console.error('❌ ERRO: REACT_APP_API_BASE_URL não está definido!');
+  console.error('Certifique-se de que o arquivo .env existe na raiz do projeto');
+}
 
 // Utility function para fazer requests
 const apiRequest = async (endpoint, options = {}) => {
