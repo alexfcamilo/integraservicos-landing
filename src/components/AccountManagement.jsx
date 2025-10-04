@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import LoadingSpinner from './common/LoadingSpinner';
 import Modal from './Modal';
-import API_BASE_URL  from '../services/api';
+import { API_BASE_URL } from '../services/api';
 
 const AccountManagement = ({ isOpen, onClose }) => {
   const { user, logout, checkAuthStatus } = useAuth();
