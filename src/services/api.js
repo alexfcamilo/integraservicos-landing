@@ -1,6 +1,6 @@
-const API_BASE_URL = 'https://conectas-production.up.railway.app';
+//const API_BASE_URL = 'https://conectas-production.up.railway.app';
 
-//const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:3000';
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:3000';
 
 // Utility function para fazer requests
 const apiRequest = async (endpoint, options = {}) => {
@@ -104,3 +104,9 @@ export const commentsAPI = {
     });
   }
 };
+
+// Exportar apiRequest para uso geral em outros componentes
+export { apiRequest };
+
+// Ou exportar também a constante API_BASE_URL se precisar
+export { API_BASE_URL };
