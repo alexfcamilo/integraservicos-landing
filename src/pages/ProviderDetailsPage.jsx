@@ -4,6 +4,7 @@ import { useService } from '../contexts/ServiceContext';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
 import LoadingSpinner from '../components/common/LoadingSpinner';
+import API_BASE_URL  from '../services/api';
 
 const ProviderDetailsPage = ({ provider, onNavigate, onOpenLogin }) => {
   const { isAuthenticated, user } = useAuth();
@@ -15,8 +16,6 @@ const ProviderDetailsPage = ({ provider, onNavigate, onOpenLogin }) => {
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState(0);
   const [showPhotoModal, setShowPhotoModal] = useState(false);
   const [loading, setLoading] = useState(true);
-
-  const API_BASE_URL = 'http://localhost:3000';
 
   useEffect(() => {
     if (provider) {

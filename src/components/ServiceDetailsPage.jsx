@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import API_BASE_URL  from '../services/api';
 
 const ServiceDetailsPage = ({ 
   serviceProvider, 
@@ -14,8 +15,6 @@ const ServiceDetailsPage = ({
   const [isCommentLoading, setIsCommentLoading] = useState(false);
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState(null);
   const [isOwner, setIsOwner] = useState(false);
-
-  const API_BASE_URL = 'http://localhost:3000';
 
   useEffect(() => {
     fetchProviderDetails();

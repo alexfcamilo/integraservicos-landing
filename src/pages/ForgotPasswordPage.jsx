@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import LoadingSpinner from '../components/common/LoadingSpinner';
+import API_BASE_URL  from '../services/api';
 
 const ForgotPasswordPage = ({ onClose, onSwitchToLogin, onSwitchToReset }) => {
   const [email, setEmail] = useState('');
@@ -26,7 +27,7 @@ const ForgotPasswordPage = ({ onClose, onSwitchToLogin, onSwitchToReset }) => {
     }
 
     try {
-      const response = await fetch('http://localhost:3000/forgot-password', {
+      const response = await fetch(`${API_BASE_URL}/forgot-password`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

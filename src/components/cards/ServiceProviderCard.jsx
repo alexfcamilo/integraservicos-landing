@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useService } from '../../contexts/ServiceContext';
+import API_BASE_URL  from '../services/api';
 
 const ServiceProviderCard = ({ provider, index, onOpenDetails, onOpenLogin }) => {
   const { isAuthenticated } = useAuth();
@@ -25,7 +26,7 @@ const ServiceProviderCard = ({ provider, index, onOpenDetails, onOpenLogin }) =>
         <div className="w-full sm:w-44 sm:h-44 md:w-48 md:h-48 bg-gradient-to-br from-gray-100 to-gray-200 flex-shrink-0 relative image-container company-image-placeholder">
           {provider.photos && provider.photos.length > 0 ? (
             <img
-              src={provider.photos[0].url.startsWith('http') ? provider.photos[0].url : `http://localhost:3000/${provider.photos[0].url}`}
+              src={provider.photos[0].url.startsWith('http') ? provider.photos[0].url : `${API_BASE_URL}/${provider.photos[0].url}`}
               alt={provider.razao_social}
               className="company-image"
             />

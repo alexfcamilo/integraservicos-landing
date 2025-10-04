@@ -2,13 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import LoadingSpinner from './common/LoadingSpinner';
 import Modal from './Modal';
-
-// URL base da API
-const API_BASE_URL = 'https://meu-projeto-backend-production.up.railway.app';
-
-//const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:3000';
-
-//https://sua-api-production.up.railway.app
+import API_BASE_URL  from '../services/api';
 
 const AccountManagement = ({ isOpen, onClose }) => {
   const { user, logout, checkAuthStatus } = useAuth();

@@ -105,8 +105,4 @@ export const commentsAPI = {
   }
 };
 
-// Exportar apiRequest para uso geral em outros componentes
-export { apiRequest };
-
-// Ou exportar também a constante API_BASE_URL se precisar
 export { API_BASE_URL };
