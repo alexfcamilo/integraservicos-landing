@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import LoadingSpinner from '../components/common/LoadingSpinner';
-import API_BASE_URL  from '../services/api';
+import { API_BASE_URL } from '../services/api';
 
 const ForgotPasswordPage = ({ onClose, onSwitchToLogin, onSwitchToReset }) => {
   const [email, setEmail] = useState('');

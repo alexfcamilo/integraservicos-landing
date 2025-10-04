@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useService } from '../../contexts/ServiceContext';
-import API_BASE_URL  from '../../services/api';
+import { API_BASE_URL } from '../../services/api';
 
 const ServiceProviderCard = ({ provider, index, onOpenDetails, onOpenLogin }) => {
   const { isAuthenticated } = useAuth();
