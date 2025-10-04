@@ -4,7 +4,7 @@ import { useService } from '../contexts/ServiceContext';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
 import LoadingSpinner from '../components/common/LoadingSpinner';
-import API_BASE_URL  from 'src/services/api.js';
+import API_BASE_URL  from 'src/services/api';
 
 const ProviderDetailsPage = ({ provider, onNavigate, onOpenLogin }) => {
   const { isAuthenticated, user } = useAuth();
