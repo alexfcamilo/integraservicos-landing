@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import LoadingSpinner from '../components/common/LoadingSpinner';
+import { apiRequest } from '../services/api';
 
 const RegisterPage = ({ onClose, onSwitchToLogin }) => {
   const [formData, setFormData] = useState({
@@ -52,7 +53,7 @@ const RegisterPage = ({ onClose, onSwitchToLogin }) => {
     }
 
     try {
-      const response = await fetch('http://localhost:3000/register', {
+      const response = await apiRequest('/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
