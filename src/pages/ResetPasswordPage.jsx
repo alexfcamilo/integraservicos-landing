@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import LoadingSpinner from '../components/common/LoadingSpinner';
-import API_BASE_URL  from 'src\services\api.js';
+import API_BASE_URL  from 'src/services/api.js';
 
 const ResetPasswordPage = ({ onClose, email, onSwitchToLogin }) => {
   const [formData, setFormData] = useState({
